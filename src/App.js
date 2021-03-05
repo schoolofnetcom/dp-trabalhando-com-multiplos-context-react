@@ -1,23 +1,16 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useContext } from 'react';
+import { AuthContext } from './AuthContextProvider';
+import { ThemeContext } from './ThemeContextProvider';
 
 function App() {
+  const { isAuth, toggleAuth } = useContext(AuthContext);
+  const { isLightTheme, lightTheme, darkTheme, toggleTheme } = useContext(ThemeContext);
+  const theme = isLightTheme ? lightTheme : darkTheme;
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <button style={{ background: theme.button, color: theme.color }} onClick={toggleTheme}>ToggleTheme</button>
+      <button style={{ background: theme.button, color: theme.color }} onClick={toggleAuth}>ToggleAuth</button>
+      Logged in: {isAuth && 'Logged in'}
     </div>
   );
 }
